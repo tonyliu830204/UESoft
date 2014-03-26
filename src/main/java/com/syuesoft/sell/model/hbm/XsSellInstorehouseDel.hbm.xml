@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class 
+  name="com.syuesoft.sell.model.XsSellInstorehouseDel" table="xs_sell_instorehouse_del">
+  <id name="detailsId" type="java.lang.Integer">
+   <column length="11" name="details_id"/>
+   <generator class="increment"/>
+  </id>
+  <many-to-one class="com.syuesoft.sell.model.XsSellInstorehouse"  lazy="false" fetch="select" 
+    name="instorehouse">
+   <column length="11" name="instorehouse_id"/>
+  </many-to-one>
+  <many-to-one class="com.syuesoft.sell.model.XsCarInfo"  lazy="false" fetch="select" 
+   name="carInfo"  >
+   <column length="11" name="xs_car_id"/>
+  </many-to-one>
+  <property  name="carInstorageResult" type="java.lang.String">
+   <column length="100" name="xs_car_instorage_result"/>
+  </property>
+  <property  name="carInstoragePerson" type="java.lang.Integer">
+   <column length="11" name="xs_car_instorage_person"/>
+  </property>
+  <property  name="carbackDate" type="java.util.Date">
+   <column name="carback_date"/>
+  </property>
+  <property  name="carbackReason" type="java.lang.String">
+   <column length="100" name="carback_reason"/>
+  </property>
+  <property  name="carOutData" type="java.util.Date">
+   <column name="xs_car_out_data"/>
+  </property>
+  <property  name="carPdsData" type="java.util.Date">
+   <column name="xs_car_pds_data"/>
+  </property>
+  <property  name="carPdsPerson" type="java.lang.Integer">
+   <column length="11" name="xs_car_pds_person"/>
+  </property>
+  <property  name="xsCensus" type="java.lang.Integer">
+   <column length="11" name="xs_census"/>
+  </property>
+  <property  name="carPdsResult" type="java.lang.String">
+   <column length="100" name="xs_car_pds_result"/>
+  </property>
+  <property  name="carInstorageAge" type="java.lang.Float">
+   <column length="5" name="xs_car_instorage_age"/>
+  </property>
+  <property  name="vehicleCost" type="java.lang.Double">
+   <column length="12" name="vehicle_cost"/>
+  </property>
+  <property  name="notax" type="java.lang.Double">
+   <column length="12" name="notax"/>
+  </property>
+  <property  name="tax" type="java.lang.Double">
+   <column length="12" name="tax"/>
+  </property>
+  <property  name="sellAllocatelType" type="java.lang.Integer">
+   <column length="11" name="xs_sell_allocatel_type"/>
+  </property>
+  <property  name="instorageDate" type="java.util.Date">
+   <column name="instorage_date"/>
+  </property>
+  <property  name="orderNumber" type="java.lang.String">
+   <column length="50" name="order_number"/>
+  </property>
+  <property  name="changeMoney" type="java.lang.Double">
+   <column length="12" name="changeMoney"/>
+  </property>
+  <property  name="freightMoney" type="java.lang.Double">
+   <column length="12" name="freightMoney"/>
+  </property>
+ </class>
+</hibernate-mapping>

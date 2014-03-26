@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib>
+	<tlibversion>1.0</tlibversion>
+	<jspversion>1.1</jspversion>
+	<shortname>privilege</shortname>
+	<uri>www.UESoft.com</uri>
+
+	<tag>
+		<name>enable</name>
+		<tagclass>com.syuesoft.Tag.PrivilegeTag</tagclass>
+		<bodycontent>JSP</bodycontent>      <!--这里如果设为empty,则无body-->
+		<attribute>
+			<name>code</name>               <!-- 属性名字 -->
+			<required>true</required>       <!-- 是否必须 -->
+			<rtexprvalue>true</rtexprvalue> <!-- 表示是否可以使用JSP表达式  --> 
+		</attribute>
+	</tag>
+</taglib>

@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+　@media screen and (max-device-width: 1700px){
+	.balancePage_showCar {
+		display:none;
+		position:absolute;
+		z-index:1;
+		margin-top:624px;
+		margin-left:1px;
+		width:510px;
+		background-color:EEFFFE;
+		height: 50px;
+		}
+　}

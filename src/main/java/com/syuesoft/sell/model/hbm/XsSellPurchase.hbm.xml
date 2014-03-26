@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.syuesoft.sell.model.XsSellPurchase" table="xs_sell_purchase">
+		<id name="id" type="java.lang.Integer">
+			<column length="11" name="id" />
+			<generator class="increment" />
+		</id>
+		<property name="purchaseId" type="java.lang.String">
+			<column name="purchase_id" length="20" />
+		</property>
+		<property name="carBrand" type="java.lang.Integer">
+			<column name="xs_car_brand" length="11" />
+		</property>
+		<property name="carModelId" type="java.lang.Integer">
+			<column name="xs_car_model_id" length="11" />
+		</property>
+		<property name="carColor" type="java.lang.Integer">
+			<column name="xs_car_color" length="11" />
+		</property>
+		<property name="planNumber" type="java.lang.Integer">
+			<column name="plan_number" length="11" />
+		</property>
+		<property name="actualNumber" type="java.lang.Integer">
+			<column name="actual_number" length="11" />
+		</property>
+		<property name="planPercent" type="java.lang.String">
+			<column name="plan_percent" length="10" />
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="remark" length="50" />
+		</property>
+		<property name="sellDate" type="java.util.Date">
+			<column name="date_" />
+		</property>
+		<property name="enterprise_id" type="java.lang.Integer">
+			<column name="enterprise_id" length="11" />
+		</property>
+	</class>
+</hibernate-mapping>

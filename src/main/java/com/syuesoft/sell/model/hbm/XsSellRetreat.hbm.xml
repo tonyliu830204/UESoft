@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class  name="com.syuesoft.sell.model.XsSellRetreat" table="xs_sell_retreat">
+	  <id name="retreatId" type="java.lang.Integer">
+	   <column length="11" name="retreat_id"/>
+	   <generator class="identity"/>
+	  </id>
+	  <many-to-one class="com.syuesoft.sell.model.XsSellInstorehouseDel"   lazy="false" fetch="select"  name="details"  >
+   		<column length="11" name="details_id"  />
+  	  </many-to-one>
+	  <property name="retreatCode" type="java.lang.String">
+		            <column name="retreat_code" length="30" />
+	  </property>
+	  <property name="retreatDate" type="java.util.Date">
+		            <column name="retreat_date"  />
+	  </property>
+	  <property name="context" type="java.lang.String">
+		            <column name="context_"  length="255"/>
+	  </property>
+	  <property name="xsCarPdsData" type="java.util.Date">
+		            <column name="xs_car_pds_data"  />
+	  </property>
+	  <property name="xsCarPdsPerson" type="java.lang.Integer">
+		            <column name="xs_car_pds_person"   length="11"/>
+	  </property>
+	  <property name="xsCarPdsResult2" type="java.lang.String">
+		            <column name="xs_car_pds_result2"   length="100"/>
+	  </property>
+	  <property name="examine" type="java.lang.Integer">
+		            <column name="examine"   length="11"/>
+	  </property>
+	  <property name="inInstorehouse" type="java.lang.Integer">
+		            <column name="in_instorehouse"   length="11"/>
+	  </property>
+	  <property name="outInstorehouse" type="java.lang.Integer">
+		            <column name="out_instorehouse"   length="11"/>
+	  </property>
+	  <property name="person" type="java.lang.Integer">
+		            <column name="person_"   length="11"/>
+	  </property>
+	  <property name="instorehouseType" type="java.lang.Integer">
+		            <column name="instorehouse_type"   length="11"/>
+	  </property>
+	  <property name="xsSupplierId" type="java.lang.Integer">
+		            <column name="xs_supplier_id"   length="11"/>
+	  </property>
+	  <property name="enterprise_id" type="java.lang.Integer">
+            <column name="enterprise_id" length="11" />
+</property>
+ </class>
+</hibernate-mapping>

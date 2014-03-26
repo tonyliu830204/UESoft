@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+		
+	<!-- 打开注解 -->
+	<context:annotation-config></context:annotation-config>
+    <aop:aspectj-autoproxy/> 
+	
+	<!-- 自动扫描装配beans -->
+	<context:component-scan base-package="com.syuesoft"></context:component-scan>
+	
+	<bean id="config" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:jdbc.properties</value>
+		</property>
+	</bean>
+
+	<!-- JDBC配置数据源 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="url" value="${connection.url}"/>
+		<property name="username" value="${connection.username}" />
+		<property name="password" value="${connection.password}" />
+	</bean>
+
+	<!-- 配置SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+<!--				<prop key="hibernate.generate_statistics">true</prop>-->
+<!--				<prop key="hibernate.cache.use_query_cache">true</prop>-->
+<!--				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>-->
+<!--				<prop key="cache.provider_configuration_file_resource_path">classpath:ehcache.xml</prop>-->
+				<prop key="hibernate.c3p0.timeout">1800</prop>
+	    		<prop key="hibernate.c3p0.max_statements">100</prop>
+	    		<prop key="hibernate.c3p0.idle_test_period">120</prop>
+	    		<prop key="hibernate.c3p0.testConnectionOnCheckout">true</prop>
+	    		<prop key="hibernate.c3p0.autoCommitOnClose">false</prop> 
+    			<prop key="hibernate.c3p0.autoReconnect">true</prop> 
+	    		<prop key="hibernate.c3p0.minPoolSize">204</prop> 
+				<prop key="hibernate.c3p0.maxPoolSize">300</prop> 
+	    		<prop key="hibernate.c3p0.maxIdleTime">25000</prop> 
+	    		<prop key="hibernate.c3p0.acquireIncrement">1</prop> 
+    			<prop key="hibernate.c3p0.acquireRetryAttempts">30</prop> 
+    			<prop key="hibernate.c3p0.acquireRetryDelay">1000</prop> 
+    			<prop key="hibernate.c3p0.testConnectionOnCheckin">true</prop> 
+    			<prop key="hibernate.c3p0.automaticTestTable">C3P0TestTable</prop> 
+    			<prop key="hibernate.c3p0.idleConnectionTestPeriod">18000</prop> 
+    			<prop key="hibernate.c3p0.checkoutTimeout">3000</prop> 
+			</props>
+		</property>
+		<property name="mappingDirectoryLocations">
+			<list>
+				<value>classpath*:/com/syuesoft/model/hbm</value>
+				<value>classpath*:/com/syuesoft/sell/model/hbm</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置事物管理 -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- 采用@Transactional注解方式使用事物 -->
+	<!-- <tx:annotation-driven transaction-manager="txManager"/> -->
+
+	<!-- 拦截器方式配置事物 -->
+	<tx:advice id="transactionAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED"  rollback-for="Exception"/>
+			<tx:method name="save*" propagation="REQUIRED"   rollback-for="Exception"/>
+			<tx:method name="update*" propagation="REQUIRED"   rollback-for="Exception"/>
+			<tx:method name="modify*" propagation="REQUIRED"   rollback-for="Exception"/>
+			<tx:method name="edit*" propagation="REQUIRED"   rollback-for="Exception"/>
+			<tx:method name="delete*" propagation="REQUIRED"   rollback-for="Exception"/>
+			<tx:method name="remove*" propagation="REQUIRED"   rollback-for="Exception"/>
+			<tx:method name="clear*" propagation="REQUIRED"   rollback-for="Exception"/>
+			<tx:method name="repair*" propagation="REQUIRED"   rollback-for="Exception"/>
+			<tx:method name="deleteAndRepair*" propagation="REQUIRED"   rollback-for="Exception"/>
+			<tx:method name="change*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="do*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="get*" propagation="NOT_SUPPORTED" read-only="true" />
+			<tx:method name="find*" propagation="NOT_SUPPORTED" read-only="true" />
+			<tx:method name="load*" propagation="NOT_SUPPORTED" read-only="true" />
+			<tx:method name="search*" propagation="NOT_SUPPORTED" read-only="true" />
+			<tx:method name="datagrid*" propagation="NOT_SUPPORTED" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut id="transactionPointcut" expression="execution(* com.syuesoft..serviceimpl..*Impl.*(..))" />
+		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
+	</aop:config>
+    
+    <import resource="context-trigger.xml" />
+    
+    <aop:config>
+		<aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut" />
+	</aop:config>
+    
+	<!-- druid监控spring dao -->
+	<bean id="druid-stat-interceptor"
+		class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+	</bean>
+
+	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
+		<property name="patterns">
+			<list>
+				<value>com.syuesoft.bas.service.*</value>
+				<value>com.syuesoft.frt.service.*</value>
+				<value>com.syuesoft.integratedservices.service.*</value>
+				<value>com.syuesoft.st.service.*</value>
+				<value>com.syuesoft.fin.service.*</value>
+				<value>com.syuesoft.integratedservices.service.*</value>
+				<value>com.syuesoft.menu.service.*</value>
+				<value>com.syuesoft.print.service.*</value>
+				<value>com.syuesoft.qx.service.*</value>
+				<value>com.syuesoft.role.service.*</value>
+				<value>com.syuesoft.sell.allocateManage.service.*</value>
+				<value>com.syuesoft.sell.base.service.*</value>
+				<value>com.syuesoft.sell.carAllocate.service.*</value>
+				<value>com.syuesoft.sell.control.service.*</value>
+				<value>com.syuesoft.sell.financemanage.service.*</value>
+				<value>com.syuesoft.sell.instore.service.*</value>
+				<value>com.syuesoft.sell.noteManage.service.*</value>
+				<value>com.syuesoft.sell.repayManage.service.*</value>
+				<value>com.syuesoft.sell.sellAccount.service.*</value>
+				<value>com.syuesoft.sell.sellInsurance.service.*</value>
+				<value>com.syuesoft.sell.sellParamSet.service.*</value>
+				<value>com.syuesoft.sell.sellwork.service.*</value>
+				<value>com.syuesoft.sell.sellZhProject.service.*</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="BasCarStatusDAO" class="com.syuesoft.bas.daoimpl.BasCarStatusDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="BasCarStyleDao" class="com.syuesoft.bas.daoimpl.BasCarStyleDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="FrtResevationDAO" class="com.syuesoft.st.daoimpl.FrtResevationDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="BasCarSellersDAO" class="com.syuesoft.bas.daoimpl.BasCarSellersDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="BasCarPartsDAO" class="com.syuesoft.bas.daoimpl.BasCarPartsDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="BasCarPhoneTrackerResultDAO"
+		class="com.syuesoft.bas.daoimpl.BasCarPhoneTrackerResultDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="FrtRcptPartsDAO" class="com.syuesoft.st.daoimpl.FrtRcptPartsDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="FrtResvPartsDAO" class="com.syuesoft.st.daoimpl.FrtResvPartsDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+<!--	<bean id="BasPartsUnitDAO" class="com.syuesoft.bas.daoimpl.BasPartsUnitDAOImpl">-->
+<!--		<property name="sessionFactory">-->
+<!--			<ref bean="sessionFactory"></ref>-->
+<!--		</property>-->
+<!--	</bean>-->
+
+	<bean id="BasStorehouseDAO" class="com.syuesoft.bas.daoimpl.BasStorehouseDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="BasPartsSellDAO" class="com.syuesoft.bas.daoimpl.BasPartsSellDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="BasCarBrandDAO" class="com.syuesoft.bas.daoimpl.BasCarBrandDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="BasPartsRateDAO" class="com.syuesoft.bas.daoimpl.BasPartsRateDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="BasPartsReportPriceClassficationDAO"
+		class="com.syuesoft.bas.daoimpl.BasPartsReportPriceClassficationDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="BasRelationCampanyDAO" class="com.syuesoft.st.daoimpl.BasRelationCampanyDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+
+	<bean id="BasRepairTypeDAO" class="com.syuesoft.st.daoimpl.BasRepairTypeDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="ReptypeDAO" class="com.syuesoft.st.daoimpl.ReptypeDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="BasClaimsTypeDAO" class="com.syuesoft.st.daoimpl.BasClaimsTypeDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="FrtPartsDAO" class="com.syuesoft.st.daoimpl.FrtPartsDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+
+	<bean id="PartsChangePriceDAO" class="com.syuesoft.st.daoimpl.PartsChangePriceDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="BasStuffDAO" class="com.syuesoft.bas.daoimpl.BasStuffDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+
+	<bean id="BasCarColorDAO" class="com.syuesoft.bas.daoimpl.BasCarColorDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="BasCarTypeDAO" class="com.syuesoft.st.daoimpl.BasCarTypeDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="FrtCarDAO" class="com.syuesoft.st.daoimpl.FrtCarDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="FrtCustomDAO" class="com.syuesoft.st.daoimpl.FrtCustomDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="BasCarColorService" class="com.syuesoft.bas.serviceimpl.BasCarColorServiceImpl">
+		<property name="dao" ref="BasCarColorDAO"></property>
+	</bean>
+
+	<bean id="BasCarStatusService" class="com.syuesoft.bas.serviceimpl.BasCarStatusServiceImpl">
+		<property name="dao" ref="BasCarStatusDAO"></property>
+	</bean>
+
+	<bean id="BasCarStyleService" class="com.syuesoft.bas.serviceimpl.BasCarStyleServiceImpl">
+		<property name="basCarStyleDao" ref="BasCarStyleDao"></property>
+		<property name="basCarTypeDAO" ref="BasCarTypeDAO"></property>
+	</bean>
+
+	<bean id="BasCarSellersService" class="com.syuesoft.bas.serviceimpl.BasCarSellersServiceImpl">
+		<property name="dao" ref="BasCarSellersDAO"></property>
+	</bean>
+
+
+	<bean id="BasCarPartsService" class="com.syuesoft.bas.serviceimpl.BasCarPartsServiceImpl">
+		<property name="dao" ref="BasCarPartsDAO"></property>
+	</bean>
+
+	<bean id="BasCarPhoneTrackerResultService"
+		class="com.syuesoft.bas.serviceimpl.BasCarPhoneTrackerResultServiceImpl">
+		<property name="dao" ref="BasCarPhoneTrackerResultDAO"></property>
+	</bean>
+
+    <bean id="BasPartsUnitService" class="com.syuesoft.bas.serviceimpl.BasPartsUnitServiceImpl">
+		
+	</bean>
+
+	<bean id="BasStorehouseService" class="com.syuesoft.bas.serviceimpl.BasStorehouseServiceImpl">
+		<property name="dao" ref="BasStorehouseDAO"></property>
+	</bean>
+
+	<bean id="BasPartsSellService" class="com.syuesoft.bas.serviceimpl.BasPartsSellServiceImpl">
+		<property name="dao" ref="BasPartsSellDAO"></property>
+	</bean>
+
+	<bean id="BasCarBrandService" class="com.syuesoft.bas.serviceimpl.BasCarBrandServiceImpl">
+		<property name="basCarBrandDAO" ref="BasCarBrandDAO"></property>
+	</bean>
+
+	<bean id="BasPartsReportPriceClassficationService"
+		class="com.syuesoft.bas.serviceimpl.BasPartsReportPriceClassficationServiceImpl">
+		<property name="dao" ref="BasPartsReportPriceClassficationDAO"></property>
+	</bean>
+
+	<bean id="tranManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="BasCarColorServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasCarColorService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="BasCarStatusServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasCarStatusService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="BasCarStyleServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasCarStyleService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="BasCarSellersServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasCarSellersService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	
+
+	<bean id="BasCarPartsServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasCarPartsService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="BasCarPhoneTrackerResultServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasCarPhoneTrackerResultService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="BasPartsUnitServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasPartsUnitService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<bean id="BasStorehouseServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasStorehouseService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="BasCarBrandServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasCarBrandService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="BasPartsSellServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasPartsSellService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="BasPartsReportPriceClassficationServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasPartsReportPriceClassficationService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="BasCarColorAction" class="com.syuesoft.bas.action.BasCarColorAction">
+		<property name="logic" ref="BasCarColorServiceAOP"></property>
+	</bean>
+
+	<bean id="BasCarStatusAction" class="com.syuesoft.bas.action.BasCarStatusAction">
+		<property name="logic" ref="BasCarStatusServiceAOP"></property>
+	</bean>
+
+	<bean id="BasCarSellersAction" class="com.syuesoft.bas.action.BasCarSellersAction">
+		<property name="logic" ref="BasCarSellersServiceAOP"></property>
+	</bean>
+
+	<bean id="BasCarStyleAction" class="com.syuesoft.bas.action.BasCarStyleAction">
+		<property name="logic" ref="BasCarStyleServiceAOP"></property>
+	</bean>
+
+	<bean id="BasCarPartsAction" class="com.syuesoft.bas.action.BasCarPartsAction">
+		<property name="logic" ref="BasCarPartsServiceAOP"></property>
+	</bean>
+
+	<bean id="BasCarPhoneTrackerResultAction" class="com.syuesoft.bas.action.BasCarPhoneTrackerResultAction">
+		<property name="logic" ref="BasCarPhoneTrackerResultServiceAOP"></property>
+	</bean>
+
+	<bean id="BasPartsUnitAction" class="com.syuesoft.bas.action.BasPartsUnitAction">
+		<property name="logic" ref="BasPartsUnitServiceAOP"></property>
+	</bean>
+
+	<bean id="BasStorehouseAction" class="com.syuesoft.bas.action.BasStorehouseAction">
+		<property name="logic" ref="BasStorehouseServiceAOP"></property>
+	</bean>
+
+	<bean id="BasPartsSellAction" class="com.syuesoft.bas.action.BasPartsSellAction">
+		<property name="logic" ref="BasPartsSellServiceAOP"></property>
+	</bean>
+
+	<bean id="BasCarBrandAction" class="com.syuesoft.bas.action.BasCarBrandAction">
+		<property name="logic" ref="BasCarBrandServiceAOP"></property>
+	</bean>
+
+	<bean id="BasPartsReportPriceClassficationAction"
+		class="com.syuesoft.bas.action.BasPartsReportPriceClassficationAction">
+		<property name="logic" ref="BasPartsReportPriceClassficationServiceAOP"></property>
+	</bean>
+
+	<bean id="StSellPerchargeDao" class="com.syuesoft.fin.daoimpl.StSellPerchargeDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="StRechargeDao" class="com.syuesoft.fin.daoimpl.StRechargeDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<!-- 维修预收款Service -->
+	<bean id="StSellPerchargeService" class="com.syuesoft.fin.serviceimpl.StSellPerchargeServiceImpl">
+	</bean>
+
+
+	<!-- 销售应收款Service -->
+	<bean id="StSellChargeService" class="com.syuesoft.fin.serviceimpl.StSellChargeServiceImpl"></bean>
+
+	<!-- 维修应收款Service -->
+	<bean id="FinMaintenanceReceivablesService"
+		class="com.syuesoft.fin.serviceimpl.FinMaintenanceReceivablesServiceImpl"></bean>
+
+		
+	<!-- 配件动态综合查询Service -->
+	<bean id="PartsTrendsChangeSearchService"
+		class="com.syuesoft.fin.serviceimpl.PartsTrendsChangeSearchServiceImpl"></bean>
+
+
+	<!-- 维修应收款AOP -->
+	<bean id="FinMaintenanceReceivablesServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="FinMaintenanceReceivablesService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 销售应收款AOP -->
+	<bean id="StSellChargeServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="StSellChargeService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+    <!-- 配件动态综合查询AOP -->
+	<bean id="PartsTrendsChangeSearchServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="PartsTrendsChangeSearchService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!--维修预收款Action -->
+	<bean id="StSellPerchargeAction" class="com.syuesoft.fin.action.StSellPerchargeAction"
+		scope="prototype">
+	</bean>
+
+	<!--维修应收款Action -->
+	<bean id="ReceivablesAction" class="com.syuesoft.fin.action.ReceivablesAction"
+		scope="prototype">
+		<property name="logic" ref="FinMaintenanceReceivablesServiceAOP"></property>
+	</bean>
+
+	<!-- 销售结算单Action -->
+	<bean id="StSellPreclrAction" class="com.syuesoft.fin.action.StSellPreclrAction"
+		scope="prototype">
+	</bean>
+
+	<!-- 销售应收款Action -->
+	<bean id="StSellChargeAction" class="com.syuesoft.fin.action.StSellChargeAction"
+		scope="prototype">
+		<property name="logic" ref="StSellChargeServiceAOP"></property>
+	</bean>
+
+	<!-- 配件动态综合查询Action -->
+	<bean id="PartsTrendsChangeSearchAction" class="com.syuesoft.fin.action.PartsTrendsChangeSearchAction"
+		scope="prototype">
+		<property name="logic" ref="PartsTrendsChangeSearchServiceAOP"></property>
+	</bean>
+	
+</beans>

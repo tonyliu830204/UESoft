@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	 <class name="com.syuesoft.model.PrintGroup" table="printgroup">
+		  <id name="groupId" type="java.lang.Integer">
+			   <column name="group_id"/>
+			   <generator class="increment"/>
+		  </id>
+		  <property name="groupName" type="java.lang.String">
+		       <column length="20" name="group_name"/>
+		  </property>
+		  <property name="tableName" type="java.lang.String">
+		       <column length="20" name="table_name"/>
+		  </property>
+		  <property name="groupSort" type="java.lang.Integer">
+		       <column name="group_sort"/>
+		  </property>
+		  <property name="checked" type="java.lang.String">
+		       <column name="checked" length="30"/>
+		  </property>
+		  <property name="systemType" type="java.lang.String">
+		       <column name="systemType" length="50"/>
+		  </property>
+		  <property name="remark" type="java.lang.String">
+		       <column length="50" name="remark"/>
+		  </property>
+		  <set name="printnoteses" inverse="true" lazy="false" fetch="select" cascade="all-delete-orphan">
+			   <key>
+			         <column name="group_id"/>
+			   </key>
+			   <one-to-many class="com.syuesoft.model.PrintNotes"/>
+		  </set>
+	 </class>
+</hibernate-mapping>

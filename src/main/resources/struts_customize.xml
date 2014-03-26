@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+   <package name="customize" extends="basePackage">
+        
+        <!-- 客户满意度统计  图形报表 -->
+		<result-types>
+			<result-type name="chart" class="org.apache.struts2.dispatcher.ChartResult"></result-type>
+		</result-types>
+	    <action name="TestAction_*" class="com.syuesoft.st.action.TestAction" method="{1}">
+	    </action>
+	    <action name="userPermission_*" class="UserPermissionAction"  method="{1}">
+	    </action>
+	    
+	    <!-- 财务模块Action -->
+	    
+	    <!-- 维修储备金Action -->
+        <action name="StSellPerchargeAction_*" class="StSellPerchargeAction"
+			method="{1}">
+		</action>
+		
+        <!-- 维修,索赔，销售Action -->
+        <action name="ReceivablesAction_*" class="ReceivablesAction" method="{1}">
+		</action>
+		
+		<!-- 销售结算单Action -->
+        <action name="StSellPreclrAction_*" class="StSellPreclrAction" method="{1}"></action>
+        
+	    <!-- 销售应收款Action -->
+        <action name="StSellChargeAction_*" class="StSellChargeAction" method="{1}"></action>
+        
+        <!-- 配件动态综合查询Action -->
+        <action name="PartsTrendsChangeSearchAction_*" class="PartsTrendsChangeSearchAction" method="{1}"></action>
+        
+        <!-- 车辆品牌Action -->
+	    <action name="BasCarBrandAction_*" class="BasCarBrandAction"
+			method="{1}">
+		</action>
+		
+		<!-- 车辆款式Action -->
+		<action name="BasCarStyleAction_*" class="BasCarStyleAction"
+			method="{1}">
+		</action>
+		
+		<!-- 车辆部位Action -->	
+		<action name="BasCarPartsAction_*" class="BasCarPartsAction"
+			method="{1}">
+		</action>	
+		
+		<!-- 车辆颜色Action -->
+		<action name="BasCarColorAction_*" class="BasCarColorAction"
+			method="{1}">
+		</action>
+
+        <!-- 电话跟踪结果action -->
+        <action name="BasCarPhoneTrackerResultAction_*" class="BasCarPhoneTrackerResultAction"
+			method="{1}">
+		</action>
+		
+		<!-- 其他销售店action -->
+		<action name="BasCarSellersAction_*" class="BasCarSellersAction"
+			method="{1}">
+		</action>
+		
+		<!-- 流失去向action -->
+		<action name="BasCarStatusAction_*" class="BasCarStatusAction"
+			method="{1}">
+		</action>
+		
+		<!-- 计量单位action -->
+		<action name="BasPartsUnitAction_*" class="BasPartsUnitAction"
+			method="{1}">
+		</action>
+		
+		<!-- 配件报价分类action -->
+		<action name="BasPartsReportPriceClassficationAction_*" class="BasPartsReportPriceClassficationAction"
+			method="{1}">
+		</action>
+		
+		<!-- 配件销售分类action -->
+		<action name="BasPartsSellAction_*" class="BasPartsSellAction"
+			method="{1}">
+		</action>
+		
+		<!--仓别分类action -->
+		<action name="BasStorehouseAction_*" class="BasStorehouseAction"
+			method="{1}">
+		</action>
+		
+		<action name="basUsedPhrasesAction_*" class="basUsedPhrasesAction"
+			method="{1}"></action>
+
+		<!-- 基础资料->工具管理 -->
+		<action name="basToolsManager_*" class="basToolsManagerAction"
+			method="{1}"></action>
+
+		<!-- 车辆型号信息 -->
+		<action name="basCarTypeInfo_*" class="basCarTypeInfoAction"
+			method="{1}"></action>
+
+		<!-- 配件基本资料 -->
+		<action name="basMountingsTypeInfo_*" class="basMountingsTypeInfoAction"
+			method="{1}"></action>
+		
+		<!-- 索理赔结算单 -->
+		<action name="finClaimantMain_*" class="finClaimantMainAction" method="{1}"></action>
+
+		<action name="BasPartsRateAction_*" class="BasPartsRateAction"
+			method="{1}">
+		</action>
+
+
+		<!-- 常用短语 -->
+		<action name="basUsedPhrasesAction_*" class="BasUsedPhrasesAction"
+			method="{1}">
+		</action>
+		<!-- 会员服务 -->
+		<action name="basVipServiceAction_*" class="BasVipServiceAction"
+			method="{1}">
+		</action>
+		<!-- 保险险种  -->
+		<action name="insuranceTypeAction_*" class="insuranceTypeAction"
+			method="{1}">
+		</action> 
+		<!-- 工时积分规则 -->
+		<action name="basMaterialIntegralruleAction_*" class="BasMaterialIntegralruleAction"
+			method="{1}">
+		</action>
+		<!-- 材料积分规则 -->
+		<action name="basMaterialIntegralruleAction_*" class="basMaterialIntegralruleAction"
+			method="{1}">
+		</action>
+		<!-- 材料积分规则 -->
+		<action name="basWorkIntegralruleAction_*" class="BasWorkIntegralruleAction"
+			method="{1}">
+		</action>
+		<!-- 合计积分规则 -->
+		<action name="basSumscoreRegulationAction_*" class="BasSumscoreRegulationAction"
+			method="{1}">
+		</action>
+		<!-- 会员卡分类 -->
+		<action name="basVipClassificationAction_*" class="BasVipClassificationAction"
+			method="{1}">
+		</action>
+		<!-- 会员材料折扣 -->
+		<action name="basVipmaterialDiscountAction_*" class="BasVipmaterialDiscountAction" 
+			method="{1}">
+		</action>
+		<!-- 会员等级管理 -->
+		<action name="basViplevelManagementAction_*" class="BasViplevelManagementAction"
+			method="{1}">
+		</action>
+		<!-- 判断保养词 -->
+		<action name="basJudgmentWordAction_*" class="BasJudgmentWordAction"
+			method="{1}">
+		</action>
+		<!-- 赠送积分内容设定 -->
+		<action name="basScoreContentsetAction_*" class="BasScoreContentsetAction"
+			method="{1}">
+		</action>
+		<!-- 会员工时折扣设定 -->
+		<action name="basVipworkDiscountAction_*" class="BasVipworkDiscountAction"
+			method="{1}">
+		</action>
+		<action name="basCustomAreaAction_*" class="BasCustomAreaAction"
+			method="{1}">
+		</action>
+		<action name="basCustomerNatureAction_*" class="BasCustomerNatureAction"
+			method="{1}">
+		</action>
+		<action name="basCustomTypeAction_*" class="BasCustomTypeAction"
+			method="{1}">
+		</action>
+		<!-- 	客户类型 -->
+		<action name="basCustomGroupAction_*" class="basCustomGroupAction"
+			method="{1}">
+		</action>
+		<action name="basCustomerComplaintsAction_*" class="BasCustomerComplaintsAction"
+			method="{1}">
+		</action>
+		<action name="basCountassociationTypeAction_*" class="BasCountassociationTypeAction"
+			method="{1}">
+		</action>
+		<action name="basVistContentAction_*" class="BasVistContentAction"
+			method="{1}">
+		</action>
+		<!-- 其他设置 -->
+		<action name="basClaimsTypeAction_*" class="BasClaimsTypeAction"
+			method="{1}">
+		</action>
+		<action name="basRepairGroupAction_*" class="BasRepairGroupAction"
+			method="{1}">
+		</action>
+		<action name="basRepairTypeAction_*" class="BasRepairTypeAction"
+			method="{1}">
+		</action>
+		<action name="basRepairWorkAction_*" class="BasRepairWorkAction"
+			method="{1}">
+		</action>
+		<!-- 会员档案管理 -->
+		<action name="vipRecordMessageAction_*" class="vipRecordMessageAction"
+			method="{1}">
+		</action>
+		<!-- 车辆保单管理 -->
+		<action name="carInsuranceManageAction_*" class="CarInsuranceManageAction"
+			method="{1}">
+			<result name="success">Return_Visit/choice_window.jsp</result>
+		</action>
+			<!-- 客户跟踪管理 -->
+		<action name="customerGzManageAction_*" class="customerGzManageAction" method="{1}">
+		</action>
+			<!-- 客户关怀中心 -->
+		<action name="customerCareAction_*" class="customerCareAction" method="{1}">
+			<result name="customer_care">Return_Visit/customer_care.jsp</result>
+		</action>
+			<!-- 日常客户跟踪 -->
+		<action name="dailyclientTrackingAction_*" class="dailyclientTrackingAction" method="{1}">
+		</action>
+		
+			<!-- 客户跟踪统计 -->
+		<action name="programTrackAction_*" class="programTrackAction" method="{1}">
+		</action>
+		
+		<!-- 视图dao -->
+		<action name="vTrackRecordAction_*" class="VTrackRecordAction" method="{1}">
+			<result type="chart" name="success">
+			<param name="width">1490</param>
+			<param name="height">540</param>
+			</result>
+		</action>
+   </package>
+</struts>

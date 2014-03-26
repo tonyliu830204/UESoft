@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.syuesoft.sell.model.XsInsurerInfo" table="xs_insurer_info" >
+        <id name="insurerId" type="java.lang.Integer">
+            <column name="xs_insurer_id"  length="11"  />
+            <generator class="increment" />
+        </id>
+        <property name="insurerCode" type="java.lang.String">
+            <column name="xs_insurer_code" length="20" />
+        </property>
+        <property name="insurerName" type="java.lang.String">
+            <column name="xs_insurer_name" length="20" />
+        </property>
+        <property name="insurerAddress" type="java.lang.String">
+            <column name="xs_insurer_address" length="50" />
+        </property>
+        <property name="insurerPhone" type="java.lang.String">
+            <column name="xs_insurer_phone" length="12" />
+        </property>
+        <property name="insurerTelephone" type="java.lang.String">
+            <column name="xs_insurer_telephone" length="12" />
+        </property>
+        <property name="insurerFax" type="java.lang.String">
+            <column name="xs_insurer_fax" length="12" />
+        </property>
+        <property name="insurerPerson" type="java.lang.String">
+            <column name="xs_insurer_person" length="12" />
+        </property>
+        <property name="insurerBeak" type="java.lang.String">
+            <column name="xs_insurer_beak" length="30" />
+        </property>
+       	<property name="insurerProperty" type="java.lang.Integer">
+            <column name="xs_insurer_property" length="11" />
+        </property>
+        <property name="insurerBeaknumber" type="java.lang.String">
+            <column name="xs_insurer_beaknumber" length="20" />
+        </property>
+        <property name="insurerTaxnumber" type="java.lang.String">
+            <column name="xs_insurer_taxnumber" length="20" />
+        </property>
+        <property name="insurerInvoicetelephone" type="java.lang.String">
+            <column name="xs_insurer_invoicetelephone" length="20" />
+        </property>
+        <property name="insurerBusinessinsurer" type="java.lang.String">
+            <column name="xs_insurer_businessinsurer" length="20" />
+        </property>
+        <property name="insurerStronginsurer" type="java.lang.String">
+            <column name="xs_insurer_stronginsurer" length="20" />
+        </property>
+        <property name="insurerRemark" type="java.lang.String">
+            <column name="xs_insurer_remark" length="50" />
+        </property>
+        <property name="enterprise_id" type="java.lang.Integer">
+            <column name="enterprise_id" length="11" />
+</property>
+    </class>
+</hibernate-mapping>

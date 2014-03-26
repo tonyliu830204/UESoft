@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+	<!-- 试图的Dao 
+	<bean id="VTrackRecordDAO"
+		class="com.syuesoft.integratedservices.daoimpl.VTrackRecordDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory">
+		</property>
+	</bean>
+	-->
+	<!-- 常用短语 dao注入sessionFactory -->
+	<bean id="basUsedPhrasesDao" class="com.syuesoft.bas.daoimpl.BasUsedPhrasesDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory">
+		</property>
+	</bean>
+	<!-- 会员服务 dao注入sessionFactory -->
+	<bean id="BasVipServiceDao" class="com.syuesoft.bas.daoimpl.BasVipServiceDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!--保险险种 dao注入sessionFactory -->
+		<!--工时积分规则 dao注入sessionFactory -->
+	<bean id="BasWorkIntegralruleDao" class="com.syuesoft.bas.daoimpl.BasWorkIntegralruleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<!-- 合计积分规则 dao注入sessionFactory -->
+	<bean id="BasSumscoreRegulationDao" class="com.syuesoft.bas.daoimpl.BasSumscoreRegulationDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<!-- 会员卡分类 dao注入sessionFactory -->
+	<bean id="BasVipClassificationDao" class="com.syuesoft.bas.daoimpl.BasVipClassificationDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<!-- 会员材料折扣 dao注入sessionFactory -->
+	<bean id="BasVipmaterialDiscountDao" class="com.syuesoft.bas.daoimpl.BasVipmaterialDiscountDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<!-- 会员等级管理dao注入sessionFactory -->
+	<bean id="BasViplevelManagementDao" class="com.syuesoft.bas.daoimpl.BasViplevelManagementDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<!-- 判断保养词dao注入sessionFactory -->
+	<bean id="BasJudgmentWordDao" class="com.syuesoft.bas.daoimpl.BasJudgmentWordDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<!-- 赠送积分内容设定dao注入sessionFactory -->
+	<bean id="BasScoreContentsetDao" class="com.syuesoft.bas.daoimpl.BasScoreContentsetDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<!-- 会员工时折扣dao注入sessionFactory -->
+	<bean id="BasVipworkDiscountDao" class="com.syuesoft.bas.daoimpl.BasVipworkDiscountDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 客户性质 -->
+	<!--客户回访项目 dao注入sessionFactory -->
+	<bean id="fbkDcserveyNameDao" class="com.syuesoft.bas.daoimpl.FbkDcserveyNameDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<!-- 客户性质 dao注入sessionFactory -->
+	<bean id="BasCustomerNatureDao" class="com.syuesoft.bas.daoimpl.BasCustomerNatureDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<!-- 客户投诉分类dao注入sessionFactory -->
+	<bean id="BasCustomerComplaintsDao" class="com.syuesoft.bas.daoimpl.BasCustomerComplaintsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<!-- 技协费分类dao注入sessionFactory -->
+	<bean id="BasCountassociationTypeDao" class="com.syuesoft.bas.daoimpl.BasCountassociationTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<!-- 回访类容dao注入sessionFactory -->
+	<bean id="BasVistContentDao" class="com.syuesoft.bas.daoimpl.BasVistContentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 其他设置 -->
+	<bean id="BasClaimsTypeDao" class="com.syuesoft.bas.daoimpl.BasClaimsTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="BasRepairGroupDao" class="com.syuesoft.bas.daoimpl.BasRepairGroupDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="BasRepairTypeDao" class="com.syuesoft.bas.daoimpl.BasRepairTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="BasRepairWorkDao" class="com.syuesoft.bas.daoimpl.BasRepairWorkDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 车辆保单管理 -->
+	<bean id="CarInsuranceManageDAO" class="com.syuesoft.integratedservices.daoimpl.CarInsuranceManageDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	
+		<!-- 地区设定 service注入dao -->
+	<bean id="BasCustomAreaService" class="com.syuesoft.bas.serviceimpl.BasCustomAreaServiceImpl">
+	    <property name="dao" ref="basCustomAreaDao"></property>
+	</bean>
+		<!-- 客户性质 service注入dao -->
+	<bean id="BasCustomerNatureService" class="com.syuesoft.bas.serviceimpl.BasCustomerNatureServiceImpl">
+	    <property name="dao" ref="BasCustomerNatureDao"></property>
+	</bean>
+		<!-- 客户类型 service注入dao -->
+	<bean id="BasCustomTypeService" class="com.syuesoft.bas.serviceimpl.BasCustomTypeServiceImpl">
+	    <property name="dao" ref="basCustomTypeDao"></property>
+	</bean>
+		<!-- 客户投诉分类 service注入dao -->
+	<bean id="BasCustomerComplaintsService" class="com.syuesoft.bas.serviceimpl.BasCustomerComplaintsServiceImpl">
+	    <property name="dao" ref="BasCustomerComplaintsDao"></property>
+	</bean>
+		<!-- 技协费分类service注入dao -->
+	<bean id="BasCountassociationTypeService" class="com.syuesoft.bas.serviceimpl.BasCountassociationTypeServiceImpl">
+	    <property name="dao" ref="BasCountassociationTypeDao"></property>
+	</bean>
+		<!-- 回访类容service注入dao -->
+	<bean id="BasVistContentService" class="com.syuesoft.bas.serviceimpl.BasVistContentServiceImpl">
+	    <property name="dao" ref="BasVistContentDao"></property>
+	</bean>
+	
+	<!-- 视图service 
+	<bean id="VTrackRecordService" class="com.syuesoft.integratedservices.serviceimpl.VTrackRecordServiceImpl">
+	    <property name="vTrackRecordDAO" ref="VTrackRecordDAO"></property>
+	</bean>
+	-->
+	<!-- 常用短语 service注入dao -->
+	<bean id="basUsedPhrasesService" class="com.syuesoft.bas.serviceimpl.BasUsedPhrasesServiceImpl">
+	    <property name="dao" ref="basUsedPhrasesDao"></property>
+	</bean>
+		<!-- 会员服务 service注入dao -->
+	<bean id="BasVipServiceService" class="com.syuesoft.bas.serviceimpl.BasVipServiceServiceImpl">
+	    <property name="dao" ref="BasVipServiceDao"></property>
+	</bean>
+		<!-- 保险险种 service注入dao -->
+		<!-- 工时积分规则 service注入dao -->
+	<bean id="BasWorkIntegralruleService" class="com.syuesoft.bas.serviceimpl.BasWorkIntegralruleServiceImpl">
+	    <property name="dao" ref="BasWorkIntegralruleDao"></property>
+	</bean>
+		<!-- 合计积分规则 service注入dao -->
+	<bean id="BasSumscoreRegulationService" class="com.syuesoft.bas.serviceimpl.BasSumscoreRegulationServiceImpl">
+	    <property name="dao" ref="BasSumscoreRegulationDao"></property>
+	</bean>
+		<!-- 会员卡分类service注入dao -->
+	<bean id="BasVipClassificationService" class="com.syuesoft.bas.serviceimpl.BasVipClassificationServiceImpl">
+	    <property name="dao" ref="BasVipClassificationDao"></property>
+	</bean>
+		<!-- 会员材料折扣service注入dao -->
+	<bean id="BasVipmaterialDiscountService" class="com.syuesoft.bas.serviceimpl.BasVipmaterialDiscountServiceImpl">
+	    <property name="dao" ref="BasVipmaterialDiscountDao"></property>
+	</bean>
+		<!-- 会员等级管理service注入dao -->
+	<bean id="BasViplevelManagementService" class="com.syuesoft.bas.serviceimpl.BasViplevelManagementServiceImpl">
+	    <property name="dao" ref="BasViplevelManagementDao"></property>
+	</bean>
+		<!-- 判断保养词service注入dao -->
+	<bean id="BasJudgmentWordService" class="com.syuesoft.bas.serviceimpl.BasJudgmentWordServiceImpl">
+	    <property name="dao" ref="BasJudgmentWordDao"></property>
+	</bean>
+		<!-- 赠送积分内容设定service注入dao  BasVipworkDiscountDao-->
+	<bean id="BasScoreContentsetService" class="com.syuesoft.bas.serviceimpl.BasScoreContentsetServiceImpl">
+	    <property name="dao" ref="BasScoreContentsetDao"></property>
+	</bean>
+			<!--会员工时折扣service注入dao  -->
+	<bean id="BasVipworkDiscountService" class="com.syuesoft.bas.serviceimpl.BasVipworkDiscountServiceImpl">
+	    <property name="dao" ref="BasVipworkDiscountDao"></property>
+	</bean>
+	<!-- 其他设置 -->
+	<bean id="BasClaimsTypeService" class="com.syuesoft.bas.serviceimpl.BasClaimsTypeServiceImpl">
+	    <property name="dao" ref="BasClaimsTypeDao"></property>
+	</bean>
+	<bean id="BasRepairGroupService" class="com.syuesoft.bas.serviceimpl.BasRepairGroupServiceImpl">
+	    <property name="dao" ref="BasRepairGroupDao"></property>
+	</bean>
+	<bean id="BasRepairTypeService" class="com.syuesoft.bas.serviceimpl.BasRepairTypeServiceImpl">
+	    <property name="dao" ref="BasRepairTypeDao"></property>
+	</bean>
+	<bean id="BasRepairWorkService" class="com.syuesoft.bas.serviceimpl.BasRepairWorkServiceImpl">
+	    <property name="dao" ref="BasRepairWorkDao"></property>
+	</bean>
+	<!-- 车辆保单管理 -->
+	<bean id="CarInsuranceManageService" class="com.syuesoft.integratedservices.serviceimpl.CarInsuranceManageServiceImpl">
+	    <property name="dao" ref="CarInsuranceManageDAO"></property>
+	</bean>
+
+	<bean id="tranManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 视图 
+		<bean id="VTrackRecordServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="VTrackRecordService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	-->
+	<!-- 常用短语 切面配置 -->
+		<bean id="basUsedPhrasesServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="basUsedPhrasesService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 会员服务 切面配置 -->
+		<bean id="BasVipServiceServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasVipServiceService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		<!-- 保险险种 切面配置 -->
+	<!-- 工时积分规则 切面配置 -->
+		<bean id="BasWorkIntegralruleServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasWorkIntegralruleService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 合计积分规则 切面配置 -->
+		<bean id="BasSumscoreRegulationServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasSumscoreRegulationService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		<!-- 会员卡分类 切面配置  BasVipmaterialDiscountService -->
+		<bean id="BasVipClassificationServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasVipClassificationService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		<!-- 会员材料折扣 切面配置  BasViplevelManagementService -->
+		<bean id="BasVipmaterialDiscountServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasVipmaterialDiscountService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		<!-- 会员等级管理 切面配置   -->
+		<bean id="BasViplevelManagementServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasViplevelManagementService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		<!-- 判断保养词切面配置   -->
+		<bean id="BasJudgmentWordServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasJudgmentWordService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		<!-- 赠送积分内容设定切面配置   BasVipworkDiscountService-->
+		<bean id="BasScoreContentsetServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasScoreContentsetService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+			<!-- 会员工时折扣设定切面配置   -->
+		<bean id="BasVipworkDiscountServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasVipworkDiscountService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+		<!-- 客户性质  -->
+		<bean id="BasCustomAreaServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasCustomAreaService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		<!-- 客户性质  -->
+		<bean id="BasCustomerNatureServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasCustomerNatureService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		<!-- 客户性质  -->
+		<bean id="BasCustomTypeServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasCustomTypeService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		<!-- 客户性质  -->
+		<bean id="BasCustomerComplaintsServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasCustomerComplaintsService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		<!-- 客户性质  -->
+		<bean id="BasCountassociationTypeServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasCountassociationTypeService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		<!-- 客户性质  -->
+		<bean id="BasVistContentServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasVistContentService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 其他设置 -->
+		<bean id="BasClaimsTypeServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasClaimsTypeService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+		<bean id="BasRepairGroupServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasRepairGroupService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		<bean id="BasRepairTypeServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasRepairTypeService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		<bean id="BasRepairWorkServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="BasRepairWorkService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		
+		
+	<!-- 车辆保单管理 -->
+		<bean id="CarInsuranceManageServiceAOP"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="tranManager" />
+		</property>
+		<property name="target">
+			<ref local="CarInsuranceManageService"></ref>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 视图 
+	<bean id="VTrackRecordAction" class="com.syuesoft.integratedservices.action.VTrackRecordAction">
+	  <property name="vTrackRecordService" ref="VTrackRecordServiceAOP"></property>
+	</bean>
+	-->
+	<!-- 常用短语 service注入action  -->
+	<bean id="BasUsedPhrasesAction" class="com.syuesoft.bas.action.BasUsedPhrasesAction">
+	  <property name="logic" ref="basUsedPhrasesServiceAOP"></property>
+	</bean>
+	<!-- 会员服务 service注入action  -->
+	<bean id="BasVipServiceAction" class="com.syuesoft.bas.action.BasVipServiceAction">
+	  <property name="logic" ref="BasVipServiceServiceAOP"></property>
+	</bean>
+	<!-- 保险险种 service注入action  -->
+	<!-- 工时积分规则 service注入action  -->
+	<bean id="BasWorkIntegralruleAction" class="com.syuesoft.bas.action.BasWorkIntegralruleAction">
+	  <property name="logic" ref="BasWorkIntegralruleServiceAOP"></property>
+	</bean>
+
+	<!--合计积分规则 service注入action  -->
+	<bean id="BasSumscoreRegulationAction" class="com.syuesoft.bas.action.BasSumscoreRegulationAction">
+	  <property name="logic" ref="BasSumscoreRegulationServiceAOP"></property>
+	</bean>
+	<!--会员卡分类 service注入action BasVipmaterialDiscountServiceAOP -->
+	<bean id="BasVipClassificationAction" class="com.syuesoft.bas.action.BasVipClassificationAction">
+	  <property name="logic" ref="BasVipClassificationServiceAOP"></property>
+	</bean>
+		<!--会员材料折扣 service注入action  -->
+	<bean id="BasVipmaterialDiscountAction" class="com.syuesoft.bas.action.BasVipmaterialDiscountAction">
+	  <property name="logic" ref="BasVipmaterialDiscountServiceAOP"></property>
+	</bean>
+		<!--会员等级管理 service注入action  -->
+	<bean id="BasViplevelManagementAction" class="com.syuesoft.bas.action.BasViplevelManagementAction">
+	  <property name="logic" ref="BasViplevelManagementServiceAOP"></property>
+	</bean>
+		<!--判断保养词service注入action  -->
+	<bean id="BasJudgmentWordAction" class="com.syuesoft.bas.action.BasJudgmentWordAction">
+	  <property name="logic" ref="BasJudgmentWordServiceAOP"></property>
+	</bean>
+		<!--赠送积分内容设定service注入action BasVipworkDiscountServiceAOP -->
+	<bean id="BasScoreContentsetAction" class="com.syuesoft.bas.action.BasScoreContentsetAction">
+	  <property name="logic" ref="BasScoreContentsetServiceAOP"></property>
+	</bean>
+		<!--会员工时折扣设定service注入action  -->
+	<bean id="BasVipworkDiscountAction" class="com.syuesoft.bas.action.BasVipworkDiscountServiceAction">
+	  <property name="logic" ref="BasVipworkDiscountServiceAOP"></property>
+	</bean>
+	
+	<bean id="BasCustomAreaAction" class="com.syuesoft.bas.action.BasCustomAreaAction">
+	  <property name="logic" ref="BasCustomAreaServiceAOP"></property>
+	</bean>
+	<bean id="BasCustomerNatureAction" class="com.syuesoft.bas.action.BasCustomerNatureAction">
+	  <property name="logic" ref="BasCustomerNatureServiceAOP"></property>
+	</bean>
+	<bean id="BasCustomTypeAction" class="com.syuesoft.bas.action.BasCustomTypeAction">
+	  <property name="logic" ref="BasCustomTypeServiceAOP"></property>
+	</bean>
+	<bean id="BasCustomerComplaintsAction" class="com.syuesoft.bas.action.BasCustomerComplaintsAction">
+	  <property name="logic" ref="BasCustomerComplaintsServiceAOP"></property>
+	</bean>
+	<bean id="BasCountassociationTypeAction" class="com.syuesoft.bas.action.BasCountassociationTypeAction">
+	  <property name="logic" ref="BasCountassociationTypeServiceAOP"></property>
+	</bean>
+	<bean id="BasVistContentAction" class="com.syuesoft.bas.action.BasVistContentAction">
+	  <property name="logic" ref="BasVistContentServiceAOP"></property>
+	</bean>
+	<!-- 其他设置 -->
+	<bean id="BasClaimsTypeAction" class="com.syuesoft.bas.action.BasClaimsTypeAction">
+	  <property name="logic" ref="BasClaimsTypeServiceAOP"></property>
+	</bean>
+	
+	<bean id="BasRepairGroupAction" class="com.syuesoft.bas.action.BasRepairGroupAction">
+	  <property name="logic" ref="BasRepairGroupServiceAOP"></property>
+	</bean>
+	<bean id="BasRepairTypeAction" class="com.syuesoft.bas.action.BasRepairTypeAction">
+	  <property name="logic" ref="BasRepairTypeServiceAOP"></property>
+	</bean>
+	<bean id="BasRepairWorkAction" class="com.syuesoft.bas.action.BasRepairWorkAction">
+	  <property name="logic" ref="BasRepairWorkServiceAOP"></property>
+	</bean>
+	
+	<!-- 车辆保单管理 -->
+	<bean id="CarInsuranceManageAction" class="com.syuesoft.integratedservices.action.CarInsuranceManageAction">
+	  <property name="carInsuranceManageService" ref="CarInsuranceManageServiceAOP"></property>
+	</bean>
+	
+	<!--
+	<bean id="DeptZtreeAction" class="com.syuesoft.qx.action.DeptZtreeAction">
+	   <property name="basDeptService" ref="BasDeptServiceAOP"></property>
+	</bean>
+	
+	-->
+	
+
+</beans>

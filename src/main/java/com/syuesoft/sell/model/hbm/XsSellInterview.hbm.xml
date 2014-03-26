@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.syuesoft.sell.model.XsSellInterview" table="xs_sell_interview" >
+        <id name="interviewId" type="java.lang.Integer">
+            <column name="interview_id"  length="11"  />
+            <generator class="increment" />
+        </id>
+         <many-to-one name="customInfo" class="com.syuesoft.sell.model.XsCustomInfo"  lazy="false" fetch="select"   unique="true">
+            <column name="custom_id" length="11" />
+        </many-to-one>
+        <property name="customPaytype" type="java.lang.Integer">
+            <column name="xs_custom_paytype" length="11" />
+        </property>
+        <property name="customTurnoverate" type="java.lang.Double">
+            <column name="xs_custom_turnoverate" length="4" />
+        </property>
+        <property name="customType" type="java.lang.Integer">
+            <column name="xs_custom_type" length="11" />
+        </property>
+        <property name="customDegreetype" type="java.lang.Integer">
+            <column name="xs_custom_degreetype" length="11" />
+        </property>
+        <property name="customFax" type="java.lang.String">
+            <column name="xs_custom_fax" length="12" />
+        </property>
+        <property name="customBackupaddress" type="java.lang.String">
+            <column name="xs_custom_backupaddress" length="50" />
+        </property>
+        <property name="customContract" type="java.lang.String">
+            <column name="xs_custom_contract" length="30" />
+        </property>
+        <property name="customBackupname" type="java.lang.String">
+            <column name="xs_custom_backupname" length="20" />
+        </property>
+        <property name="customVisitdata" type="java.util.Date">
+            <column name="xs_custom_visitdata" length="20" />
+        </property>
+        <property name="customHobby" type="java.lang.String">
+            <column name="xs_custom_hobby" length="50" />
+        </property>
+        <property name="customBackupperson" type="java.lang.String">
+            <column name="xs_custom_backupperson" length="20" />
+        </property>
+        <property name="customAbandondata" type="java.util.Date">
+            <column name="xs_custom_abandondata"  />
+        </property>
+        <property name="customUpdateCause" type="java.lang.String">
+            <column name="xs_custom_update_cause" length="50"  />
+        </property>
+        <property name="customUpdateDate" type="java.util.Date">
+            <column name="xs_custom_update_date"  />
+        </property>
+        <property name="needprice" type="java.lang.Double">
+            <column name="needprice" length="12"  />
+        </property>
+        <property name="applyreason" type="java.lang.String">
+            <column name="applyreason" length="100"  />
+        </property>
+        <property name="performance" type="java.lang.String">
+            <column name="performance" length="100"  />
+        </property>
+        <property name="lovecolor" type="java.lang.Integer">
+            <column name="lovecolor" length="11"  />
+        </property>
+        <property name="carmodel" type="java.lang.Integer">
+            <column name="carmodel" length="11"  />
+        </property>
+        <property name="purchaseDate" type="java.util.Date">
+            <column name="purchase_date"   />
+        </property>
+        <property name="obstruct" type="java.lang.Integer">
+            <column name="obstruct"  length="11" />
+        </property>
+        <property name="customRemark" type="java.lang.String">
+            <column name="xs_custom_remark"  length="50" />
+        </property>      
+    </class>
+</hibernate-mapping>

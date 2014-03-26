@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.syuesoft.model.StOutInItem" table="st_out_in_item" >
+        <composite-id name="id" class="com.syuesoft.model.StOutInItemId">
+            <key-property name="indexId" type="java.lang.Integer">
+                <column name="INDEX_ID" precision="8" scale="0" />
+            </key-property>
+            <key-property name="itemIndex" type="java.lang.Integer">
+                <column name="ITEM_INDEX" precision="8" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="stOutItem" class="com.syuesoft.model.StOutItem" update="false" insert="false" cascade="all" fetch="join">
+            <column name="INDEX_ID" precision="8" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="stStorageItem" class="com.syuesoft.model.StStorageItem" update="false"  insert="false" fetch="select">
+            <column name="ITEM_INDEX" precision="8" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="outNumber" type="java.lang.Double">
+            <column name="out_number" />
+        </property>
+    </class>
+</hibernate-mapping>

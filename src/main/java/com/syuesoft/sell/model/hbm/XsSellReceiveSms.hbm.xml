@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class  name="com.syuesoft.sell.model.XsSellReceiveSms" table="xs_sell_receiveSms">
+	  <id name="detail_id" type="java.lang.Integer">
+	   <column length="11" name="detail_id"/>
+	   <generator class="increment"/>
+	  </id>
+	  <property name="sms_id" type="java.lang.String">
+	            <column name="sms_id" />
+	  </property>
+	  <property name="receive_date" type="java.lang.String">
+	            <column name="receive_date"  />
+	  </property>
+	  <property name="phonecode" type="java.lang.String">
+	            <column name="phonecode"  />
+	  </property>
+	  <property name="custom_id" type="java.lang.Integer">
+	            <column name="custom_id" length="11" />
+	  </property>
+	  <property name="receive_state" type="java.lang.Integer">
+	            <column name="receive_state" length="11" />
+	  </property>
+	   <property name="custom_name" type="java.lang.String">
+	            <column name="custom_name" />
+	  </property>
+	  
+
+ </class>
+</hibernate-mapping>

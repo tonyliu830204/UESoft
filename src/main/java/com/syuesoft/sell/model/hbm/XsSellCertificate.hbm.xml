@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class  name="com.syuesoft.sell.model.XsSellCertificate" table="xs_sell_certificate">
+	  <id name="certificateId" type="java.lang.Integer">
+	   <column length="11" name="certificate_id"/>
+	   <generator class="increment"/>
+	  </id>
+	  <property name="xsCarId" type="java.lang.Integer">
+	            <column name="xs_car_id" length="11" />
+	  </property>
+	  <property name="receiptId" type="java.lang.Integer">
+	            <column name="receipt_id" length="11" />
+	  </property>
+	  <property name="xsCarCertificate" type="java.lang.String">
+	            <column name="xs_car_certificate" length="20" />
+	  </property>
+	  <many-to-one name="xsSellCertificateState" class="com.syuesoft.sell.model.XsChilddictionary" lazy="false" fetch="select">
+            <column name="xs_car_certificate_state" precision="11" />
+        </many-to-one><!--
+	  <property name="xsCarCertificateState" type="java.lang.Integer">
+	            <column name="xs_car_certificate_state" length="11" />
+	  </property>
+	  --><property name="redemptionDate" type="java.util.Date">
+	            <column name="redemption_date" />
+	  </property>
+	  <property name="certificatePerson" type="java.lang.String">
+	            <column name="certificate_person" length="11" />
+	  </property>
+	  <property name="certificateDate" type="java.util.Date">
+	            <column name="certificate_date"  />
+	  </property>
+	  <property name="remark" type="java.lang.String">
+	            <column name="remark" length="50" />
+	  </property>
+ </class>
+</hibernate-mapping>

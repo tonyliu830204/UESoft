@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.syuesoft.model.SubstituteSuitPayment" table="substitute_suit_payment" >
+        <id name="sspId" type="java.lang.String">
+            <column name="SSP_ID" length="30" />
+            <generator class="assigned" />
+        </id>
+        <property name="customId" type="java.lang.String">
+            <column name="CUSTOM_ID" length="20"/>
+        </property>
+        <property name="sspReceivables" type="java.lang.Double">
+            <column name="SSP_RECEIVABLES" precision="12" />
+        </property>
+        <property name="sspCumulative" type="java.lang.Double">
+            <column name="SSP_CUMULATIVE" precision="12" />
+        </property>
+        <property name="sspAllowArrearsAge" type="java.lang.Short">
+            <column name="SSP_ALLOW_ARREARS_AGE" precision="4" scale="0" />
+        </property>
+        <property name="sspReceivablesArrearsAge" type="java.lang.Short">
+            <column name="SSP_RECEIVABLES_ARREARS_AGE" precision="4" scale="0" />
+        </property>
+        <property name="sspAllowFlag" type="java.lang.Boolean">
+            <column name="SSP_ALLOW_FLAG" precision="1" scale="0" />
+        </property>
+        <property name="sspAllowArrearsAmount" type="java.lang.Double">
+            <column name="SSP_ALLOW_ARREARS_AMOUNT" precision="12" />
+        </property>
+        <property name="sspAllowArrearsNumber" type="java.lang.Short">
+            <column name="SSP_ALLOW_ARREARS_NUMBER" precision="4" scale="0" />
+        </property>
+        <property name="sspPrintFlag" type="java.lang.Boolean">
+            <column name="SSP_PRINT_FLAG" precision="1" scale="0" />
+        </property>
+        <property name="sspUnFinished" type="java.lang.Short">
+            <column name="SSP_UNFINISHED" precision="1" scale="0" />
+        </property>
+        <property name="sspType" type="java.lang.Short">
+            <column name="SSP_TYPE" precision="1" scale="0" />
+        </property>
+        <property name="sspBatch" type="java.lang.Short">
+            <column name="SSP_BATCH" precision="1" scale="0" />
+        </property>
+        <property name="sspArrears" type="java.lang.Double">
+            <column name="SSP_ARREARS" precision="12" />
+        </property>
+        <property name="sspDate" type="java.util.Date">
+            <column name="SSP_DATE" length="19" />
+        </property>
+        <property name="balanceId" type="java.lang.String">
+            <column name="BALANCE_ID" length="30"/>
+        </property>
+        <property name="sspDifferenceBalance" type="java.lang.Short">
+            <column name="SSP_DIFFERENCE_BALANCE" precision="1" scale="0" />
+        </property>
+        <property name="sspBatchTag" type="java.lang.Short">
+            <column name="SSP_BATCH_TAG" precision="1" scale="0" />
+        </property>
+        <property name="enterpriseId" type="java.lang.Integer">
+            <column name="enterprise_id"  length="11" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

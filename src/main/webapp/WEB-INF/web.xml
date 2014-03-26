@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<display-name>UESoft</display-name>
+	<distributable/>
+	<!--  配置Spring容器：指定Spring文件的路径，让spring知道事务管理的bean所在-->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/applicationContext*.xml</param-value>
+	</context-param>
+	
+    <!--  在Struts2感知下，Spring容器的加载  -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<listener>
+	     <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+    
+    <listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>com.syuesoft.listener.SessionListener</listener-class>
+	</listener>
+	
+	<filter>
+	    <filter-name>struts-cleanup</filter-name>
+	    <filter-class>org.apache.struts2.dispatcher.ActionContextCleanUp</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	    <filter-name>struts-cleanup</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
+ 
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>
+			org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+		</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+    <filter>  
+        <filter-name>sessionFilter</filter-name>  
+        <filter-class>com.syuesoft.filter.SessionFilter</filter-class>  
+    </filter> 
+    
+    <filter-mapping>  
+        <filter-name>sessionFilter</filter-name>  
+        <url-pattern>*.jsp</url-pattern>  
+    </filter-mapping>  
+	 
+	<!--  配置  OpenSessionInViewFilter或OpenSessionInViewInterceptor -->
+	<filter>
+		<filter-name>hibernateFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<!--  singleSession默认为true,若设为false则等于没用OpenSessionInView -->
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!--  Character Encoding 配置  -->
+	<filter>
+		<filter-name>Spring character encoding filter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>GBK</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>Spring character encoding filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- druid数据源Web关联监控-->
+	<filter>
+		<filter-name>DruidWebStatFilter</filter-name>
+		<filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+		<init-param>
+			<param-name>exclusions</param-name>
+			<param-value>*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*</param-value>
+		</init-param>
+		<init-param>
+			<param-name>principalSessionName</param-name>
+			<param-value>sessionInfo</param-value>
+		</init-param>
+		<init-param>
+			<param-name>profileEnable</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>DruidWebStatFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
+		<servlet-name>log4j config file</servlet-name>
+		<servlet-class>com.syuesoft.interceptor.Log4jInitServlet</servlet-class>
+		<init-param>
+			<param-name>configfile</param-name>
+			<param-value>/WEB-INF/classes/log4j.properties</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<!--  druid监控页面，使用druid/index.html访问 -->
+	<servlet>
+		<servlet-name>DruidStatView</servlet-name>
+		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DruidStatView</servlet-name>
+		<url-pattern>/druid/*</url-pattern>
+	</servlet-mapping>
+    
+	<servlet>
+		<servlet-name>pushlet</servlet-name>
+		<servlet-class>nl.justobjects.pushlet.servlet.Pushlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+    <servlet>
+	    <servlet-name>PICServlet</servlet-name>
+	    <servlet-class>com.syuesoft.serlet.PICServlet</servlet-class>
+    </servlet>
+	<servlet-mapping>
+		<servlet-name>pushlet</servlet-name>
+		<url-pattern>/pushlet.srv</url-pattern>
+	</servlet-mapping>
+	
+    <servlet-mapping>
+	    <servlet-name>PICServlet</servlet-name>
+	    <url-pattern>/servlet/PICServlet</url-pattern>
+    </servlet-mapping>
+	
+ 	<session-config>  
+	     <session-timeout>3</session-timeout>  
+	</session-config> 
+	
+	<welcome-file-list>
+	     <welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+    <jsp-config>
+		<taglib>
+			<taglib-uri>/priveliege</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/priveliege.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+    
+</web-app>

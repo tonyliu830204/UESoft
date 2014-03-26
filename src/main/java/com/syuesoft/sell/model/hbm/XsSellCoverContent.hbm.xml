@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class  name="com.syuesoft.sell.model.XsSellCoverContent" table="xs_sell_cover_content">
+	  <id name="contentId" type="java.lang.Integer">
+	   <column length="11" name="content_id"/>
+	   <generator class="increment"/>
+	  </id>
+	  <property name="consultId" type="java.lang.Integer">
+	            <column name="consult_id"/>
+	  </property>
+	  <property name="projectId" type="java.lang.Integer">
+	            <column name="project_id"  />
+	  </property>
+	  <!--<property name="projectEvaluate" type="java.lang.Integer">
+	            <column name="project_evaluate"  />
+	  </property>
+	  --><property name="projectScore" type="java.lang.Integer">
+	            <column name="project_score"/>
+	  </property>
+	  <property name="remark" type="java.lang.String">
+	            <column name="remark"/>
+	  </property>
+	  <many-to-one name="xsSellCoverContentEvaluate" class="com.syuesoft.sell.model.XsChilddictionary" lazy="false" fetch="select">
+            <column name="project_evaluate" precision="11" />
+        </many-to-one>
+	 
+ </class>
+</hibernate-mapping>

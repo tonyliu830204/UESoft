@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class  name="com.syuesoft.sell.model.XsSellInsurdetail" table="xs_sell_insurdetail">
+	  <id name="detailId" type="java.lang.Integer">
+	   <column length="11" name="detail_id"/>
+	   <generator class="increment"/>
+	  </id>
+	  <property name="insuranceId" type="java.lang.Integer">
+	            <column name="insurance_id"/>
+	  </property>
+	  <property name="insurancetype" type="java.lang.String">
+	            <column name="insurancetype"  />
+	  </property>
+	  <property name="insurancemoney" type="java.lang.Double">
+	            <column name="insurancemoney"  />
+	  </property>
+	  <property name="insurancerate" type="java.lang.String">
+	            <column name="insurancerate"/>
+	  </property>
+	  <property name="insurancecost" type="java.lang.Double">
+	            <column name="insurancecost"/>
+	  </property>
+	 
+ </class>
+</hibernate-mapping>

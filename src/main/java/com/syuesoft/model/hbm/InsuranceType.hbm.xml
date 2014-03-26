@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.syuesoft.model.InsuranceType" table="insurance_type" >
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="increment" />
+        </id>
+        <property name="intype" type="java.lang.String">
+            <column name="intype" not-null="true" unique="true" />
+        </property>
+        <property name="incount" type="java.lang.String">
+            <column name="incount" length="20" />
+        </property>
+        <property name="infeelv" type="java.lang.String">
+            <column name="infeelv" length="100" />
+        </property>
+        <property name="infee" type="java.lang.String">
+            <column name="infee" length="10" />
+        </property>
+        <property name="memo" type="java.lang.String">
+            <column name="MEMO" length="200" />
+        </property>
+        <property name="enterpriseId" type="java.lang.Integer">
+            <column name="enterprise_id" precision="8" scale="0" />
+        </property>
+        <set name="centerCarinInties" inverse="true" cascade="save-update">
+            <key>
+                <column name="id" not-null="true" />
+            </key>
+            <one-to-many class="com.syuesoft.model.CenterCarinInty" />
+        </set>
+    </class>
+</hibernate-mapping>

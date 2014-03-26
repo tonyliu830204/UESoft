@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class  name="com.syuesoft.sell.model.XsSellSms" table="xs_sell_sms">
+	  <id name="sms_id" type="java.lang.String">
+	   <column length="11" name="sms_id"/>
+	   <generator class="assigned"/>
+	  </id>
+	  <property name="sft_id" type="java.lang.Integer">
+	            <column name="sft_id" length="11" />
+	  </property>
+	  <property name="sms_date" type="java.lang.String">
+	            <column name="sms_date"  />
+	  </property>
+	  <property name="sms" type="java.lang.String">
+	            <column name="sms" length="11" />
+	  </property>
+	  <property name="sms_way" type="java.lang.Integer">
+	            <column name="sms_way" length="11" />
+	  </property>
+	  <property name="sms_type" type="java.lang.Integer">
+	            <column name="sms_type" length="11" />
+	  </property>
+	  <property name="sms_state" type="java.lang.Integer">
+	            <column name="sms_state" length="11" />
+	  </property>
+	  <property name="enterprise_id" type="java.lang.Integer">
+            <column name="enterprise_id" length="11" />
+	</property>
+	  
+
+ </class>
+</hibernate-mapping>

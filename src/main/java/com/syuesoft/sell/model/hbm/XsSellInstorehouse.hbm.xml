@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.syuesoft.sell.model.XsSellInstorehouse" table="xs_sell_instorehouse">
+		<id name="instorehouseId" type="java.lang.Integer">
+			<column length="11" name="instorehouse_id" />
+			<generator class="increment" />
+		</id>
+		<property name="instorehouseCode" type="java.lang.String">
+			<column name="instorehouse_code" length="20" />
+		</property>
+		<property name="instorehouseDate" type="java.sql.Timestamp">
+			<column name="instorehouse_date" />
+		</property>
+		<property name="invoiceType" type="java.lang.Integer">
+			<column name="invoice_type" length="11" />
+		</property>
+		<property name="stfId" type="java.lang.Long">
+			<column name="STF_ID" length="11" />
+		</property>
+		<property name="warehouse" type="java.lang.Integer">
+			<column name="warehouse" length="11" />
+		</property>
+		<property name="purchaser" type="java.lang.Integer">
+			<column name="purchaser" length="11" />
+		</property>
+		<property name="receipt" type="java.lang.String">
+			<column name="receipt" length="20" />
+		</property>
+		<property name="state1" type="java.lang.Integer">
+			<column name="state" length="11" />
+		</property>
+		<property name="number" type="java.lang.Integer">
+			<column name="number_" length="20" />
+		</property>
+
+		<property name="notax" type="java.lang.Double">
+			<column name="notax" length="12" />
+		</property>
+		<property name="tax" type="java.lang.Double">
+			<column name="tax" length="12" />
+		</property>
+		<property name="transportVehicles" type="java.lang.String">
+			<column name="transport_vehicles" length="12" />
+		</property>
+		<property name="examineState" type="java.lang.Integer">
+			<column name="examine_state" length="11" />
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="remark" length="50" />
+		</property>
+		<property name="supplierId" type="java.lang.Integer">
+			<column name="xs_supplier_id" length="11" />
+		</property>
+		<property name="source" type="java.lang.Integer">
+			<column name="source" length="11" />
+		</property>
+		<property name="enterprise_id" type="java.lang.Integer">
+			<column name="enterprise_id" length="11" />
+		</property>
+	</class>
+</hibernate-mapping>

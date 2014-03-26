@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.syuesoft.model.PartsChangePrice" table="parts_change_price" >
+        <id name="changePriceId" type="java.lang.Integer">
+            <column name="CHANGE_PRICE_ID" precision="8" scale="0" />
+            <generator class="increment" />
+        </id>
+        <property name="storeId" type="java.lang.Short">
+            <column name="STORE_ID" precision="4" scale="0" not-null="true" />
+        </property>
+        <property name="partsId" type="java.lang.String">
+            <column name="PARTS_ID" length="30" not-null="true" />
+        </property>
+        <property name="partsRepairPrice" type="java.lang.Double">
+            <column name="PARTS_REPAIR_PRICE" precision="12" />
+        </property>
+        <property name="partsSellPrice" type="java.lang.Double">
+            <column name="PARTS_SELL_PRICE" precision="12" />
+        </property>
+        <property name="partsPointPrice" type="java.lang.Double">
+            <column name="PARTS_POINT_PRICE" precision="12" />
+        </property>
+        <property name="partsSpecialPrice" type="java.lang.Double">
+            <column name="PARTS_SPECIAL_PRICE" precision="12" />
+        </property>
+        <property name="partsClaimantPrice" type="java.lang.Double">
+            <column name="PARTS_CLAIMANT_PRICE" precision="12" />
+        </property>
+        <property name="partsLatestTaxprice" type="java.lang.Double">
+            <column name="PARTS_LATEST_TAXPRICE" precision="12" />
+        </property>
+        <property name="partsLatestNotaxprice" type="java.lang.Double">
+            <column name="PARTS_LATEST_NOTAXPRICE" precision="12" />
+        </property>
+        <property name="partsNowCount" type="java.lang.Double">
+            <column name="PARTS_NOW_COUNT" precision="12" />
+        </property>
+        <property name="stockUpper" type="java.lang.Double">
+            <column name="STOCK_UPPER" precision="12" />
+        </property>
+        <property name="stockLower" type="java.lang.Double">
+            <column name="STOCK_LOWER" precision="12"/>
+        </property>
+        <property name="enterpriseId" type="java.lang.Integer">
+            <column name="enterprise_id" precision="4" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

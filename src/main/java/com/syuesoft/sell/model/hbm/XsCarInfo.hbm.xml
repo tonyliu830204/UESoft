@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.syuesoft.sell.model.XsCarInfo" table="xs_car_info">
+		<id name="carId" type="java.lang.Integer">
+			<column length="11" name="xs_car_id" />
+			<generator class="increment" />
+		</id>
+		<property name="carModelId" type="java.lang.Integer">
+			<column name="xs_car_model_id" length="11" />
+		</property>
+		<property name="carOptional" type="java.lang.Integer">
+			<column name="xs_car_optional" length="11" />
+		</property>
+		<property name="carMortgageState" type="java.lang.Integer">
+			<column name="xs_car_mortgage_state" length="11" />
+		</property>
+		<property name="carCode" type="java.lang.String">
+			<column name="xs_car_code" length="20" />
+		</property>
+		<property name="carLicensePlate" type="java.lang.String">
+			<column name="xs_car_licensePlate" length="20" />
+		</property>
+		<property name="carLicenseName" type="java.lang.String">
+			<column name="xs_car_licenseName" length="20" />
+		</property>
+		<property name="carVinNumber" type="java.lang.String">
+			<column name="xs_car_vin_number" length="20" />
+		</property>
+		<property name="carMotorNumber" type="java.lang.String">
+			<column name="xs_car_motor_number" length="20" />
+		</property>
+		<property name="carOcn" type="java.lang.String">
+			<column name="xs_car_ocn" length="20" />
+		</property>
+		<property name="carCertificate" type="java.lang.String">
+			<column name="xs_car_certificate" length="20" />
+		</property>
+		<property name="carMakeData" type="java.util.Date">
+			<column name="xs_car_make_data" />
+		</property>
+		<property name="carUnlockingKeyNumber" type="java.lang.String">
+			<column name="xs_car_unlockingKeyNumber" length="20" />
+		</property>
+		<property name="carRideLimitNumber" type="java.lang.Integer">
+			<column name="xs_car_rideLimit_number" length="11" />
+		</property>
+		<property name="carTradeCheckBill" type="java.lang.String">
+			<column name="xs_car_tradeCheck_bill" length="20" />
+		</property>
+		<property name="carProductionAddress" type="java.lang.String">
+			<column name="xs_car_production_address" length="50" />
+		</property>
+		<property name="carAddress" type="java.lang.String">
+			<column name="xs_car_address" length="50" />
+		</property>
+		<property name="carCopyData" type="java.sql.Timestamp">
+			<column name="xs_car_copy_data" />
+		</property>
+		<property name="carAssembleData" type="java.sql.Timestamp">
+			<column name="xs_car_assemble_data" />
+		</property>
+		<property name="carEndCheckData" type="java.sql.Timestamp">
+			<column name="xs_car_endCheck_data" />
+		</property>
+		<property name="carFristInsuranceData" type="java.sql.Timestamp">
+			<column name="xs_car_fristInsurance_data" />
+		</property>
+		<property name="carForecastData" type="java.sql.Timestamp">
+			<column name="xs_car_forecast_data" />
+		</property>
+		<property name="carPrice" type="java.lang.Double">
+			<column name="xs_car_price" length="12" />
+		</property>
+		<property name="distributorId" type="java.lang.Integer">
+			<column name="xs_distributor_id" length="11" />
+		</property>
+		<property name="servicingNextdate" type="java.util.Date">
+			<column name="servicing_nextdate" />
+		</property>
+		<property name="upData" type="java.lang.String">
+			<column name="upData" />
+		</property>
+		<property name="upPerson" type="java.lang.Integer">
+			<column name="upPerson" />
+		</property>
+		<property name="proveFile" type="java.lang.String">
+			<column name="proveFile" length="20" />
+		</property>
+		<property name="rzBook" type="java.lang.String">
+			<column name="rzBook" length="20" />
+		</property>
+		<property name="enterpriseId" type="java.lang.Integer">
+			<column name="enterprise_id" length="11" />
+		</property>
+		<many-to-one name="brandChild" class="com.syuesoft.sell.model.XsChilddictionary" lazy="false" fetch="select">
+            <column name="xs_car_brand" precision="11" />
+        </many-to-one>
+        <many-to-one name="colorChild" class="com.syuesoft.sell.model.XsChilddictionary" lazy="false" fetch="select">
+            <column name="xs_car_color" precision="11" />
+        </many-to-one>
+        <many-to-one name="interiorColorChild" class="com.syuesoft.sell.model.XsChilddictionary" lazy="false" fetch="select">
+            <column name="xs_car_InteriorColor" precision="11" />
+        </many-to-one>
+        <many-to-one name="carTypeChild" class="com.syuesoft.sell.model.XsChilddictionary" lazy="false" fetch="select">
+            <column name="xs_car_type" precision="11" />
+        </many-to-one>
+        <many-to-one name="normsChild" class="com.syuesoft.sell.model.XsChilddictionary" lazy="false" fetch="select">
+            <column name="norms" precision="11" />
+        </many-to-one>
+        <many-to-one name="toolCaseChild" class="com.syuesoft.sell.model.XsChilddictionary" lazy="false" fetch="select">
+            <column name="toolCase" precision="11" />
+        </many-to-one>
+        <many-to-one name="footdChild" class="com.syuesoft.sell.model.XsChilddictionary" lazy="false" fetch="select">
+            <column name="footd" precision="11" />
+        </many-to-one>
+        <many-to-one name="sellStateChild" class="com.syuesoft.sell.model.XsChilddictionary" lazy="false" fetch="select">
+            <column name="xs_car_sell_state" precision="11" />
+        </many-to-one>
+        <many-to-one name="certificateChild" class="com.syuesoft.sell.model.XsChilddictionary" lazy="false" fetch="select">
+            <column name="xs_car_certificate_state" precision="11" />
+        </many-to-one>
+        <many-to-one name="distributChild" class="com.syuesoft.sell.model.XsChilddictionary" lazy="false" fetch="select">
+            <column name="xs_car_distribut_state" precision="11" />
+        </many-to-one>
+        <many-to-one name="fixStatusChild" class="com.syuesoft.sell.model.XsChilddictionary" lazy="false" fetch="select">
+            <column name="fix_status" precision="11" />
+        </many-to-one>
+	</class>
+</hibernate-mapping>

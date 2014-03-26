@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class  name="com.syuesoft.sell.model.XsSellAttachment" table="xs_sell_attachment">
+	  <id name="attachment_no" type="java.lang.Integer">
+	   <column length="11" name="attachment_no"/>
+	   <generator class="increment"/>
+	  </id>
+	  <property name="xs_car_id" type="java.lang.Integer">
+	            <column name="xs_car_id" length="11" />
+	  </property>
+	  <property name="count1" type="java.lang.Integer">
+	            <column name="count1" length="11" />
+	  </property>
+	  <property name="count2" type="java.lang.Integer">
+	            <column name="count2" length="11" />
+	  </property>
+	  
+	  <property name="operator_persion" type="java.lang.Integer">
+	            <column name="operator_persion" />
+	  </property>
+	  <property name="operator_date" type="java.lang.String">
+	            <column name="operator_date"  />
+	  </property>
+	  <property name="send_persion" type="java.lang.String">
+	            <column name="send_persion" length="20" />
+	  </property><!--
+	  
+	  <property name="operator_type" type="java.lang.Integer">
+	            <column name="operator_type"  />
+	  </property>
+	  --><property name="remark" type="java.lang.String">
+	            <column name="remark" />
+	  </property>
+	  <many-to-one name="xsChilddictionary" class="com.syuesoft.sell.model.XsChilddictionary" lazy="false" fetch="select">
+            <column name="operator_type" precision="11" />
+        </many-to-one>
+	 
+ </class>
+</hibernate-mapping>

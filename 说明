@@ -1,0 +1,84 @@
+增加新用户
+首先用以root用户连入mysql
+格式：grant 权限类型 on 数据库.表(所有表*) to 用户名@登录主机 identified by "密码"
+增加一个用户user1密码为password1，让其可以在本机上登录， 并对所有数据库有查询、插入、修改、删除的权限。
+命令如:grant select,insert,update,delete on *.* to user1@localhost Identified by "password1";
+如果希望该用户能够在任何机器上登陆mysql，则将localhost改为"%"。
+
+grant：用于管理访问权限，也就是给用户账号授权。当然它同样可以创建一个新的用户账户。
+如：grant select, insert, update, delete on new_db.* to guest@'%' identified by '88888888'; 
+
+
+初始化mysql  数据表
+
+bas_car_bodys_status;
+bas_childdictionary;
+bas_company_information_set;
+bas_dept;
+bas_job_property;
+bas_menu_info;
+bas_parentdictionary;
+bas_role;
+enterprise_info;
+enterprise_work;
+wx_control;
+xs_childdictionary;
+xs_parentdictionary;
+
+DELETE FROM st_sell_percharge;
+DELETE FROM bas_users;
+DELETE FROM bas_stuff;
+DELETE FROM bas_car_bodys_status;
+DELETE FROM bas_childdictionary;
+DELETE FROM bas_company_information_set;
+DELETE FROM bas_dept;
+DELETE FROM bas_job_property;
+DELETE FROM bas_menu_info;
+DELETE FROM bas_parentdictionary;
+DELETE FROM wx_control;
+DELETE FROM xs_childdictionary;
+DELETE FROM xs_parentdictionary;
+DELETE FROM xs_sell_parameter;
+DELETE FROM st_use_percharge;
+DELETE FROM wx_stuff_control;
+
+SELECT * FROM st_use_percharge;
+SELECT * FROM bas_users;
+SELECT * FROM bas_stuff;
+SELECT * FROM bas_car_bodys_status;
+SELECT * FROM bas_childdictionary;
+SELECT * FROM bas_company_information_set;
+SELECT * FROM bas_dept;
+SELECT * FROM bas_job_property;
+SELECT * FROM bas_menu_info;
+SELECT * FROM bas_parentdictionary;
+SELECT * FROM wx_control;
+SELECT * FROM xs_childdictionary;
+SELECT * FROM xs_parentdictionary;
+SELECT * FROM xs_sell_parameter;
+
+UPDATE bas_menu_info SET person = '1' ;
+UPDATE bas_childdictionary SET STF_ID = '1' ;
+UPDATE bas_parentdictionary SET STF_ID = '1' ;
+UPDATE bas_role SET person = '1';
+UPDATE xs_childdictionary SET createUser = '1' ;
+UPDATE xs_parentdictionary SET createUser = '1' ;
+
+
+USE `testuesoft`;
+
+/*Data for the table `bas_stuff` */
+
+LOCK TABLES `bas_stuff` WRITE;
+
+insert  into `bas_stuff`(`STF_ID`,`STF_Y_ID`,`STF_NAME`,`STF_MARK`,`STF_SEX`,`STF_YES`,`DEPT_ID`,`REPGRP_ID`,`STF_ZWGZ`,`STF_PHONE`,`STF_TEL`,`STF_ZXQK`,`STF_BIRTHDAY`,`STF_GJ`,`STF_WORK_DATE`,`STF_BYYX`,`STF_BYSJ`,`STF_SXZY`,`STF_WHCD`,`STF_GZNX`,`STF_JSDJ`,`STF_YHBYZS`,`STF_SFZHM`,`STF_SG`,`STF_TZ`,`STF_SL`,`STF_XX`,`STF_HYZK`,`STF_HKSZD`,`STF_XJZDZ`,`STF_MZ`,`STF_ZZMM`,`STF_WYSP`,`STF_JSJSP`,`STF_DZYX`,`STF_TC`,`STF_AH`,`STF_DBRXM`,`STF_DBRSFZHM`,`STF_POXM`,`STF_POSFZHM`,`STF_YJRQ`,`STF_YJJE`,`STF_YJBZ`,`STF_NO`,`REPGRP_ID2`) values ('1','YG0000','超级管理员','ADMINISTRATOR','M','stfYes','1','3',NULL,NULL,NULL,'inservice',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'87');
+
+UNLOCK TABLES;
+
+/*Data for the table `bas_users` */
+
+LOCK TABLES `bas_users` WRITE;
+
+insert  into `bas_users`(`STF_ID`,`USER_ID`,`SYSTEMID`,`USER_NAME`,`USER_PASSWD`,`LEVAL_`) values ('1','1','','administrator','e10adc3949ba59abbe56e057f20f883e','administrator');
+
+UNLOCK TABLES;

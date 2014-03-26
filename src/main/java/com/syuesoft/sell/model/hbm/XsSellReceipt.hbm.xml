@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class  name="com.syuesoft.sell.model.XsSellReceipt" table="xs_sell_receipt">
+	  <id name="receiptId" type="java.lang.Integer">
+	   <column length="11" name="receipt_id"/>
+	   <generator class="increment"/>
+	  </id>
+	  <property name="receiptCode" type="java.lang.String">
+	            <column name="receipt_code" length="20" />
+	  </property>
+	  <property name="enterpriseId" type="java.lang.Integer">
+	            <column name="enterprise_id" length="30" />
+	  </property>
+	  <property name="receiptBank" type="java.lang.Integer">
+	            <column name="receipt_bank" length="30" />
+	  </property>
+	  <property name="receiptMoney" type="java.lang.Double">
+	            <column name="receipt_money" length="12" />
+	  </property>
+	  <property name="receiptStartDate" type="java.util.Date">
+	            <column name="receipt_startDate"  />
+	  </property>
+	  <property name="receiptEndDate" type="java.util.Date">
+	            <column name="receipt_endDate"  />
+	  </property>
+	  <property name="receiptState" type="java.lang.Integer">
+	            <column name="receipt_state" length="11" />
+	  </property>
+	  <property name="remark" type="java.lang.String">
+	            <column name="remark" length="50" />
+	  </property>
+ </class>
+</hibernate-mapping>
